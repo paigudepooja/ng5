@@ -77,7 +77,7 @@ export class DialogOverviewExampleDialog implements OnInit {
 
   ngOnInit() {
     this._data.element.subscribe(res => this.elements = res);
-    this._data.changeElement(this.element);
+    this._data.changeElement(this.elements);
   }
 
   onNoClick(): void {
@@ -86,7 +86,7 @@ export class DialogOverviewExampleDialog implements OnInit {
 
   onNoClickAdd(data): void {
     this.elements.push({name:data.name,phone:data.phone, email: data.email, address: data.address});
-    this._data.changeElement(this.element);
+    this._data.changeElement(this.elements);
     this.dialogRef.close();
   }
 
