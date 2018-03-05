@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Add Lead</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.name" placeholder="Enter lead">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.email" placeholder="Enter email">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.phone" placeholder="Enter phone">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.address" placeholder="Enter address">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No</button>
+  <button mat-button (click)="onNoClickAdd(data)" cdkFocusInitial>Ok</button>
+</div>

@@ -1,0 +1,27 @@
+.container {
+  display: grid;
+  grid-template-columns: 50% auto;
+}
+.life-container {
+  background: #3FA0E1;
+  padding: .5em;
+  font-weight: bold;
+  cursor: pointer;
+}
+.example-container {
+  display: flex;
+  margin: auto 45px;
+  flex-direction: column;
+  min-width: 300px;
+}
+.text-inside-grid-left {
+  position: absolute;
+  left: 25px;
+}
+.text-inside-grid-right {
+  position: absolute;
+  right: 25px;
+}
+.top-50 {
+  top: 50px;
+}
