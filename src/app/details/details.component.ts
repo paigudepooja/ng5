@@ -1,5 +1,7 @@
 import {Component,Inject, OnInit} from '@angular/core';
 import {DataService} from '../data.service';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-details',
@@ -9,13 +11,27 @@ import {DataService} from '../data.service';
 export class DetailsComponent implements OnInit {
 
   elements = [];
-
-  constructor( private _data: DataService ) { }
+  data = null;
+  constructor( private _data: DataService, private route: ActivatedRoute, private location: Location ) { }
 
 
     ngOnInit() {
       this._data.element.subscribe(res => this.elements = res);
-      console.log(this.elements)
+      console.log(this.elements);
+      this.loadData();
+    }
+
+    loadData(){
+      const id = +this.route.snapshot.paramMap.get('id');
+      for( var i in this.elements ){
+        if( id == this.elements[i].id ){
+          this.data = this.elements[i];
+        }
+      }
+    }
+
+    goBack(){
+      this.location.back();
     }
 
     onNoClickAdd(){

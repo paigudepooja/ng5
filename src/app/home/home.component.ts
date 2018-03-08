@@ -1,34 +1,8 @@
-// import { Component, OnInit } from '@angular/core';
-//
-// @Component({
-//   selector: 'app-home',
-//   templateUrl: './home.component.html',
-//   styleUrls: ['./home.component.css']
-// })
-// export class HomeComponent implements OnInit {
-//
-//   itemCount: number = 4;
-//   btnText: string = 'Add an Item';
-//   goalText: string = 'My first life goal';
-//
-//   goals = [];
-//   constructor() { }
-//
-//   ngOnInit() {
-//     this.itemCount = this.goals.length;
-//   }
-//
-//   addItem() {
-//     this.goals.push(this.goalText);
-//     this.goalText = '';
-//     this.itemCount = this.goals.length;
-//   }
-//
-// }
 import {Component,Inject, OnInit} from '@angular/core';
 import {MatPaginator, MatSort,MatTable, MatTableDataSource} from '@angular/material';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {DataService} from '../data.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -36,8 +10,8 @@ import {DataService} from '../data.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit{
-  displayedColumns = ['lead', 'email', 'phone', 'address'];
-  constructor(public dialog: MatDialog, private _data: DataService) {}
+  displayedColumns = ['lead', 'email', 'phone', 'address', 'action'];
+  constructor(public dialog: MatDialog, private _data: DataService, private router: Router) {}
 
   name: string;
   email: string;
@@ -46,20 +20,32 @@ export class HomeComponent implements OnInit{
 
   elements = [];
   dataSource = null;
-  openDialog(): void {
+  openDialog() {
     let dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: '250px',
       data: { phone: this.phone, name: this.name, email:this.email, address: this.address }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      this.dataSource = this.elements;
+      console.log('The dialog was closed',result);
     });
   }
 
   ngOnInit() {
     this._data.element.subscribe(res => this.elements = res);
     this.dataSource = this.elements;
+  }
+
+  addRow() {
+    this.elements.push({name:'data.name',phone:8090, email: 'data.email', address: 'data.address'});
+    this.dataSource = this.elements;
+  }
+  nextStep(index) {
+    this.router.navigate(['details/'+index]);
+  }
+  remove(idx){
+    
   }
 }
 
@@ -89,5 +75,4 @@ export class DialogOverviewExampleDialog implements OnInit {
     this._data.changeElement(this.elements);
     this.dialogRef.close();
   }
-
 }

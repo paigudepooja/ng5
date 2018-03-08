@@ -12,54 +12,35 @@
   <mat-table #table [dataSource]="dataSource">
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns; let idx = index"></mat-row>
 
     <ng-container matColumnDef="lead">
       <mat-header-cell *matHeaderCellDef> Lead </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      <mat-cell *matCellDef="let element; let idx = index" (click)="nextStep(idx)"> {{element.name}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="email">
       <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+      <mat-cell *matCellDef="let element; let idx = index" (click)="nextStep(idx)">  {{element.email}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="phone">
       <mat-header-cell *matHeaderCellDef> Phone </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.phone}} </mat-cell>
+      <mat-cell *matCellDef="let element; let idx = index" (click)="nextStep(idx)">  {{element.phone}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="address">
       <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.address}} </mat-cell>
+      <mat-cell *matCellDef="let element; let idx = index" (click)="nextStep(idx)"> {{element.address}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action" >
+      <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+      <mat-cell *matCellDef="let element; let idx = index">
+         <button mat-button color="warn">Edit</button>
+         <button mat-button color="warn" (click)="remove(idx)">Remove</button>
+       </mat-cell>
     </ng-container>
 
   </mat-table>
 </div>
-
-<a routerLink="/details">Details</a>
-<!-- <p>
-  home works!
-</p>
-<div class="container color-dark">
-  <div class="col">
-    <p>Add a bucket list itwm</p>
-  </div>
-  <div class="col">
-    <p>Your bucket list ({{ itemCount }})</p>
-  </div>
-</div>
-<div class="container color-dark">
-  <div class="col">
-    <p>Use this form below to add a new bucket list goal.</p>
-    <form>
-      <input type="text" name="item" placeholder="Life of goal" [(ngModel)]="goalText">
-      <input type="submit" class="btn" [value]="btnText" (click)="addItem()">
-    </form>
-  </div>
-  <div class="col">
-    <p class="life-container" *ngFor='let goal of goals'>
-      {{ goal }}
-    </p>
-  </div>
-</div> -->
